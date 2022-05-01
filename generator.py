@@ -50,7 +50,7 @@ class gen():
 
     def genuser():
         word_list = gen.word_list() #gets the word list
-        return "".join(random.choice(word_list)).join(random.choice(word_list)) + str(random.randrange(100, 999)) #returns two words and a random 3 digit number together
+        return "".join(random.choice(word_list)) + ''.join(random.choice(word_list)) + str(random.randrange(100, 999)) #returns two words and a random 3 digit number together
     
     def genuser_password(amount, paslength, write_to_file):
         creds = ''
