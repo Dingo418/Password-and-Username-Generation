@@ -4,13 +4,17 @@ class gen():
 
     def __init__(self):
         # command feedback for various arguments
-        pas_length, amount = 8, 1  # Sets defaults
+        pas_length, amount, write_to_file = 8, 1, False  # Sets defaults
         try:
             pas_length = int(sys.argv[1])  # sees if their is an argument for agr 1
         except (IndexError, ValueError):
             pass
         try:
             amount = int(sys.argv[2]) # sees if their is an argument for agr 2
+        except (IndexError, ValueError):
+            pass
+        try:
+            write_to_file = bool(sys.argv[3]) # sees if their is an argument for agr 3
         except (IndexError, ValueError):
             pass
         try:
@@ -21,7 +25,7 @@ class gen():
                 sys.exit()
         except IndexError:  # if the user did not pass anything threw
             print("No password length specified, using default of 8.")
-        gen.genuser_password(amount, pas_length)
+        gen.genuser_password(amount, pas_length, write_to_file)
     def genlist():
         lower = "abcdefghijklmnopqrstuvwxyz"
         upper = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
@@ -48,10 +52,15 @@ class gen():
         word_list = gen.word_list() #gets the word list
         return "".join(random.choice(word_list)).join(random.choice(word_list)) + str(random.randrange(100, 999)) #returns two words and a random 3 digit number together
     
-    def genuser_password(amount, paslength):
+    def genuser_password(amount, paslength, write_to_file):
+        creds = ''
         for i in range(0, amount): #loops for as many times in amount
             user = gen.genuser() #gets a random username
             password = gen.genpassword(paslength) #gets a random password with determined length
+            creds += f"{user}, {password}\n"
             print(f"Your username is: {user} | Your password is: {password}") #outputs it into console
+        if write_to_file == True:
+           open("credentials.txt", "a").write(creds)
+
 
 gen()
