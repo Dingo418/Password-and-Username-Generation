@@ -10,3 +10,7 @@ Setting the password length and the amount of accounts:
 
 `generator <password_length> <amount_of_accounts>`
 
+Setting the password length and the amount of accounts and you want a dump file:
+
+`generator <password_length> <amount_of_accounts> True` 
+
